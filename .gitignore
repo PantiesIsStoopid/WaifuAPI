@@ -1,1 +1,5 @@
-PythonVersion/image.jpg
+# Ignore all image files (e.g., .jpg, .png)
+*.jpg
+*.jpeg
+*.png
+*.gif
