@@ -11,8 +11,10 @@ if not os.path.exists(save_path):
 
 url = 'https://api.waifu.im/search'
 params = {
-    'included_tags': ['waifu', 'raiden-shogun'],
-    'height': '>=2000'
+    'included_tags': ['waifu', 'raiden-shogun','uniform'],
+    'is_nsfw': False,
+    'height': '>=2000',
+    'Accept-Version': 'v6'
 }
 
 response = requests.get(url, params=params)
