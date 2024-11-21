@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Waifu Images</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px;
+        }
+        #status {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        #image-container {
+            margin-top: 20px;
+        }
+        img {
+            max-width: 500px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fetch Waifu Images</h1>
+
+    <label for="tags">Tags (comma separated):</label>
+    <input type="text" id="tags" value="raiden-shogun,waifu" placeholder="e.g., raiden-shogun, maid">
+    <br>
+
+    <label for="height">Min Height:</label>
+    <input type="number" id="height" value="2000" placeholder="e.g., 2000">
+    <br>
+
+    <button onclick="fetchImage()">Fetch Image</button>
+
+    <div id="status"></div>
+
+    <div id="image-container"></div>
+
+    <!-- Link to the external JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
