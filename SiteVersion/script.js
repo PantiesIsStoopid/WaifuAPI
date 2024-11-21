@@ -1,15 +1,31 @@
 function fetchImage() {
-  const tags = document.getElementById('tags').value;
-  const height = document.getElementById('height').value;
+  // Predefined tags array
+  const tagsArray = [
+    'maid',
+    'marin-kitagawa',
+    'mori-calliope',
+    'raiden-shogun',
+    'oppai',
+    'selfies',
+    'uniform',
+    'kamisato-ayaka',
+  ];
+
+  // Select a random tag from the array
+  const randomTag = tagsArray[Math.floor(Math.random() * tagsArray.length)];
 
   // Show loading status
-  document.getElementById('status').innerText = 'Fetching image...';
+  document.getElementById(
+    'status',
+  ).innerText = `Fetching image for tag: ${randomTag}...`;
 
   // Prepare the request URL
   const apiUrl = 'https://api.waifu.im/search'; // Replace with the actual API endpoint URL
+  const height = 2000; // You can set a default height or allow user to specify
+
   const params = {
-    included_tags: tags.split(','), // Split input tags into an array
-    height: `>=${height}`,
+    included_tags: [randomTag], // Use the randomly selected tag
+    height: `>=${height}`, // Ensure images are at least this tall
   };
 
   const queryParams = new URLSearchParams();
@@ -51,7 +67,7 @@ function fetchImage() {
           'Image fetched successfully!';
       } else {
         document.getElementById('status').innerText =
-          'No images found for the given tags and height.';
+          'No images found for the given tag and height.';
       }
     })
     .catch((error) => {

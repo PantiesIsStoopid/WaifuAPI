@@ -3,15 +3,26 @@ from PIL import Image
 from io import BytesIO
 import os
 import hashlib
+import random
 
 # Set the save path to the same directory as the script
 save_path = os.path.dirname(os.path.abspath(__file__))  # Get the directory of the current script
 if not os.path.exists(save_path):
     os.makedirs(save_path)  # Create the directory if it doesn't exist
 
+# List of possible tags
+tags = [
+    'waifu', 'maid', 'marin-kitagawa', 'mori-calliope', 'raiden-shogun', 
+    'oppai', 'selfies', 'uniform', 'kamisato-ayaka'
+]
+
+# Randomly select one tag from the list
+selected_tag = random.choice(tags)
+
+# Prepare the API request parameters
 url = 'https://api.waifu.im/search'
 params = {
-    'included_tags': ['waifu', 'raiden-shogun','uniform'],
+    'included_tags': [selected_tag],
     'is_nsfw': False,
     'height': '>=2000',
     'Accept-Version': 'v6'
@@ -25,6 +36,7 @@ def get_image_hash(image_content):
 
 if response.status_code == 200:
     data = response.json()
+    print(f"Selected Tag: {selected_tag}")  # Print the selected tag
     print(data)  # Print the whole response to check its structure
 
     # Check if 'images' key exists and if there's at least one image
@@ -48,7 +60,6 @@ if response.status_code == 200:
                         print("The image is already saved and is identical. Skipping download.")
                         # Skip the download and saving process
                         image_response = None  # Clear the image_response to prevent further processing
-            
             if image_response:  # Only process the image if it's not already skipped
                 # Open the image
                 image = Image.open(BytesIO(image_response.content))
